@@ -7,8 +7,9 @@ from get_script import ScriptRequest, RandomQuote
 episodes = ListEp()
 episode = episodes.random_episode()
 formatted_episode = TextConverter(episode).new_text()
-script_request = ScriptRequest(script="TheMango")
-# script_request = ScriptRequest(script=formatted_episode)
+script_request = ScriptRequest(script=formatted_episode)
+# this was used for testing purposes
+# script_request = ScriptRequest(script="TheMango")
 
 script = script_request.get_script()
 character = RandomQuote(script, input("Choose your character: e.g. Jerry, Elaine, George ").title())
