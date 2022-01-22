@@ -54,7 +54,7 @@ class RandomQuote:
         upper_name, title_name = self.double_name()
         # here we use "r" for regex and "f" for f-strings
         # https://stackoverflow.com/questions/8194470/python-regex-with-look-behind-and-alternatives
-        pattern = re.compile(fr"(?<={upper_name}:).*|(?<={title_name}).*", re.DOTALL)
+        pattern = re.compile(fr"(?<={upper_name}:).*|(?<={title_name}:).*", re.DOTALL)
         quotes = self.script.find_all(text=pattern)
 
         # this is a list of quotes
