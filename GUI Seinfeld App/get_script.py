@@ -5,11 +5,14 @@ from bs4 import BeautifulSoup
 
 
 class ScriptRequest:
-    """this request gets the script from the episode"""
+    """
+    This request gets the script from the episode list.
+    :param: script: this is a formatted random episode's title
+    :type: script is a string type
+    """
 
     def __init__(self, script):
         self.script = script
-        self.request = None
 
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0',
@@ -33,9 +36,22 @@ class ScriptRequest:
 
 
 class RandomQuote:
-    """random quote from character's lines"""
+    """
+    This class gets a random quote from a character's line.
+    :param: script: this is a ScriptRequest object instance
+    :param: name: this is a parameter that implements a validation logic
+    :return: quote: the quote is a single random string from a list
+    """
 
-    def __init__(self, script, name):
+    CHARACTERS = ["jerry", "elaine", "kramer", "george"]
+
+    def __init__(self, script: object, name: int):
+        # validate parameter name
+        name = name.lower().strip()
+
+        if name not in self.CHARACTERS:
+            raise ValueError(f"{name} not a valid character")
+
         self.script = script
         self.name = name
 
@@ -62,3 +78,7 @@ class RandomQuote:
         quotes = [quote[0].strip() for quote in quotes if len(quote[0].split()) >= 3]
         quote = choice(quotes)
         return quote
+    
+    # object representation
+    def __repr__(self):
+        return f"RandomQuote(script={self.script}, name='{self.name}')"
